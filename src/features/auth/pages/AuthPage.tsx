@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Music, User as UserIcon, LogIn, MailIcon, LockIcon, EyeIcon, EyeOffIcon } from 'lucide-react';
 import "../../../assets/css/toaster.css";
 import Toaster from '../../../shared/components/Toaster';
@@ -40,6 +40,16 @@ const AuthPage: React.FC = () => {
       icon: <LockIcon size={16} />
     }
   ];
+
+  useEffect(() => {
+    if (isLogin && envs.MODE === 'prod-demo') {
+      setForm({
+        ...form,
+        email: envs.DEMO_USER.email,
+        password: envs.DEMO_USER.pass
+      });
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#090909] bg-linear-to-br from-[#121212] via-[#050505] to-black flex flex-col justify-center items-center px-4 relative select-none overflow-hidden" id="auth-screen-root">
@@ -147,12 +157,6 @@ const AuthPage: React.FC = () => {
                 </>
               )}
             </button>
-
-            {(isLogin && envs.MODE === 'prod-demo') && (
-              <p className="text-[#adaaaa] text-center text-sm select-text">
-                Demo → <strong>{envs.DEMO_USER.email}</strong> / <strong>{envs.DEMO_USER.pass}</strong>
-              </p>
-            )}
           </form>
 
           {/* Toggle Tab Footer */}
