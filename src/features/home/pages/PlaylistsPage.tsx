@@ -75,9 +75,9 @@ const PlaylistsPage = () => {
   useEffect(() => { getPlaylists(filters) }, []);
 
   return (
-    <div className="overflow-hidden w-full h-full text-[#adaaaa] relative py-10">
-      <div className="mb-8 overflow-auto max-h-[calc(100vh-64px-88px)] md:px-8 px-2">
-        <h1 className="mx-auto md:text-3xl text-2xl font-bold text-white">
+    <div className="overflow-hidden w-full h-full text-[#adaaaa] relative py-8">
+      <div className="mb-5 overflow-auto max-h-[calc(100vh-64px-88px)] md:px-8 px-4">
+        <h1 className="mx-auto text-2xl font-bold font-headline text-white tracking-tight">
           Tus listas
         </h1>
       </div>
@@ -138,16 +138,15 @@ const PlaylistsPage = () => {
                 to={redirectTo}
               >
                 <h3
-                  className="font-light text-white mb-0 truncate text-sm sm:text-base google-sans-flex-font"
+                  className="font-light text-white mb-0 text-sm sm:text-base line-clamp-2 google-sans-flex-font"
                   title={it.name}
+                  style={{
+                    fontWeight: 500
+                  }}
                 >
                   {it.name}
                 </h3>
               </Link>
-
-              <p className="text-sm text-[#adaaaa] line-clamp-2 leading-relaxed">
-                Lista
-              </p>
             </div>
           )
         })}
