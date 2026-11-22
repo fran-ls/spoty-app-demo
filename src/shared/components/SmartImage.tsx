@@ -2,6 +2,7 @@ import { useEffect, useState, type ImgHTMLAttributes } from "react";
 import { MusicIcon } from "lucide-react";
 import { getStyles, type ItemStyle, type Style } from "../utils/getStyles";
 import { cn } from "../utils/tailwindCn";
+import { envs } from "../utils/envs";
 
 const selectors = {
   wrap: 'img-wrap',
@@ -49,6 +50,11 @@ const SmartImage = (props: SmartImageProps) => {
 
   useEffect(() => { setIsError(false) }, props.deps || [url]);
 
+  if (url && url.startsWith(envs.API_URL)) {
+    imgProps.crossOrigin = 'use-credentials';
+    imgProps.referrerPolicy = 'strict-origin-when-cross-origin';
+  }
+
   return (
     <div
       style={{
@@ -60,8 +66,6 @@ const SmartImage = (props: SmartImageProps) => {
       {url && (
         <img
           src={url}
-          // crossOrigin="anonymous"
-          // referrerPolicy="no-referrer"
           {...imgProps}
           style={{
             ...values.img.style,
